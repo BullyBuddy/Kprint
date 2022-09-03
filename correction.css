@@ -1,0 +1,8 @@
+body {
+    background: #2e99ce;
+}
+ul.nav a:hover { color: rgb(24, 226, 68) !important; }
+.nav > li > a:hover{
+    background-color:rgb(240, 13, 210);
+}
+

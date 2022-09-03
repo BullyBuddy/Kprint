@@ -1,0 +1,92 @@
+<script type="text/javascript">
+    // validate contact form
+
+$(function() {
+
+    $('#email_form').validate({ 
+
+        rules: {   
+
+      
+            email: { 
+                required: true,
+                email: true
+            },
+
+             nom: { 
+                required: true
+            },
+             
+
+           tels: { 
+                required: true
+            },
+
+           
+
+        
+        },
+
+         
+
+        messages: { 
+            nom:  "",
+            email:  "",
+            tels:  "",
+           
+               
+                  
+        },
+        submitHandler: function(form) { 
+       $("#submit").fadeOut("slow");
+          $('.form-message-c').html('Encours d\'envoi...').fadeIn("slow");
+
+
+            $(form).ajaxSubmit({ 
+                type:"POST",
+                data: $(form).serialize(),
+                url:"https://youssefimpressions.ma/contact/send_B",
+               
+              success: function(res) { 
+                if(res!= 1){ 
+                  $('.form-message-c').html("error , Actualiser cette page!!"); 
+                  $("#submit").fadeIn("slow");
+
+                }else{ 
+              $('.form-message-c').html("Votre demande a bien été envoyé!!!").fadeIn("slow"); 
+            
+            
+                 setTimeout( "$('#submit').fadeIn('slow');",2000 );
+                 clear_Inputs();
+               
+                  }
+                },
+
+                error: function() { 
+                  
+                    $('#email_form').fadeTo( "slow", 0.15, function() { 
+                        $('#error').fadeIn();
+                    });
+                }
+            });
+        }
+    });
+});
+function clear_Inputs(data){ 
+$("#email_form :input").each(function(){ 
+$(this).val('');
+$('#submit').attr('value',"Envoyer")
+});
+}
+
+
+
+
+</script>  
+
+
+
+
+
+</body>
+</html>
